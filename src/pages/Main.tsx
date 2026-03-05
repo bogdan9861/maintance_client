@@ -1,10 +1,20 @@
 import Header from "../components/Header";
 import useUser from "../hooks/useUser";
+import React, { useEffect } from "react";
 
 import ProductsTable from "../components/ProductsTable";
+import { enums } from "../constants";
+import { useNavigate } from "react-router";
 
 const Main = () => {
   const { user } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem(enums.TOKEN)) {
+      navigate("login");
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
