@@ -1,22 +1,7 @@
-import { useEffect, useState } from "react";
-import { Table, Modal, Avatar, Badge, Button, message } from "antd";
-import type { ColumnsType } from "antd/es/table";
-
 import Header from "../components/Header";
 import useUser from "../hooks/useUser";
-import { getProducts, removeProduct } from "../api/products";
-import { getNotifications } from "../api/notifications";
-import ProductModal from "../components/ProductModal";
-import EditProductModal from "../components/EditProductModal";
-import ProductsTable from "../components/ProductsTable";
 
-interface Product {
-  id: string;
-  name: string;
-  inventoryCode: string;
-  imageUrl?: string;
-  description?: string;
-}
+import ProductsTable from "../components/ProductsTable";
 
 const Main = () => {
   const { user } = useUser();

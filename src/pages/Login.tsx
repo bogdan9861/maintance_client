@@ -1,4 +1,4 @@
-import { Form, Input, Button, Typography, message, Alert } from "antd";
+import { Form, Input, Button, Typography, message } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
