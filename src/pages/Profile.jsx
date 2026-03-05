@@ -6,26 +6,22 @@ import {
   Button,
   Typography,
   Tabs,
-  Table,
   message,
   Upload,
   Avatar,
   Spin,
-  DatePicker,
 } from "antd";
-import type { ColumnsType } from "antd/es/table";
+
 import {
   ArrowLeftOutlined,
   DeleteFilled,
-  DeleteOutlined,
   EditFilled,
   LoginOutlined,
-  LogoutOutlined,
   PaperClipOutlined,
   UploadOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import useUser from "../hooks/useUser";
 import { createProduct, getProducts, removeProduct } from "../api/products";
 import { enums } from "../constants";
