@@ -47,6 +47,8 @@ const ProductsTable = () => {
       });
   };
 
+  console.log(user?.role);
+
   const handleRowClick = (record) => {
     setSelectedProduct(record);
     setIsModalOpen(true);
@@ -72,54 +74,51 @@ const ProductsTable = () => {
       render: (value) => <p>{value?.toFixed(1)}</p>,
     },
     { title: "Часов до ТО", dataIndex: "standartUsageHours" },
-    user?.role === "ADMIN" || user?.role === "ENGINEER" ? (
-      {
-        title: "Действия",
-        render: (value) => (
-          <div className="flex items-center justify-center gap-5">
-            {user?.role === "ADMIN " && (
-              <>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleRemoveProduct(value);
-                  }}
-                >
-                  <DeleteFilled style={{ color: "red", fontSize: 18 }} />
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setEditOpen(true);
-                    setSelectedProduct(value);
-                  }}
-                >
-                  <EditFilled
-                    style={{ color: "rgba(0,0,0,0.8)", fontSize: 18 }}
-                  />
-                </button>
-              </>
-            )}
 
-            {user?.role === "ENGINEER" && (
+    {
+      title: "Действия",
+      render: (value) => (
+        <div className="flex items-center justify-center gap-5">
+          {user?.role === "ADMIN" && (
+            <>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setReportOpen(true);
+                  handleRemoveProduct(value);
+                }}
+              >
+                <DeleteFilled style={{ color: "red", fontSize: 18 }} />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setEditOpen(true);
                   setSelectedProduct(value);
                 }}
               >
-                <FileImageTwoTone
+                <EditFilled
                   style={{ color: "rgba(0,0,0,0.8)", fontSize: 18 }}
                 />
               </button>
-            )}
-          </div>
-        ),
-      }
-    ) : (
-      <p>Нет прав</p>
-    ),
+            </>
+          )}
+
+          {user?.role === "ENGINEER" && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setReportOpen(true);
+                setSelectedProduct(value);
+              }}
+            >
+              <FileImageTwoTone
+                style={{ color: "rgba(0,0,0,0.8)", fontSize: 18 }}
+              />
+            </button>
+          )}
+        </div>
+      ),
+    },
   ];
 
   return (

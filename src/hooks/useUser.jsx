@@ -22,7 +22,11 @@ const useUser = () => {
       });
   }, [user]);
 
-  return { user, isLoading: loading };
+  return {
+    user,
+    isLoading: loading,
+    refresh: () => setUser(null),
+  };
 };
 
 export default useUser;

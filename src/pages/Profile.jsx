@@ -28,16 +28,10 @@ import { enums } from "../constants";
 import EditProductModal from "../components/EditProductModal";
 import ProductModal from "../components/ProductModal";
 import ProductsTable from "../components/ProductsTable";
+import { editUser } from "../api/users";
+import ReportsTable from "../components/ReportsTable";
 
 const { Title, Text } = Typography;
-
-const mockUser = {
-  id: "1",
-  firstName: "Иван",
-  lastName: "Петров",
-  email: "ivan@mail.com",
-  role: "ADMIN",
-};
 
 const ProfilePage = () => {
   const [products, setProducts] = useState([]);
@@ -50,7 +44,7 @@ const ProfilePage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [productOpen, setProductOpen] = useState(false);
 
-  const { user, isLoading } = useUser();
+  const { user, isLoading, refresh } = useUser();
 
   const navigate = useNavigate();
 
@@ -70,7 +64,14 @@ const ProfilePage = () => {
   }, []);
 
   const handleProfileUpdate = (values) => {
-    message.success("Профиль обновлён");
+    editUser(values)
+      .then(() => {
+        message.success("Профиль обновлён");
+        refresh();
+      })
+      .catch((e) => {
+        message.error("Не удалось изменить данные профиля");
+      });
   };
 
   const handleAddProduct = (values) => {
@@ -405,6 +406,11 @@ const ProfilePage = () => {
                   key: "list",
                   label: "Все изделия",
                   children: <ProductsTable />,
+                },
+                {
+                  key: "reports",
+                  label: "Все отчёты",
+                  children: <ReportsTable />,
                 },
               ]}
             />

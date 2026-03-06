@@ -17,6 +17,10 @@ const EditProductModal = ({
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    editForm.resetFields();
+  }, [open]);
+
   const handleEdit = (values) => {
     setLoading(true);
 

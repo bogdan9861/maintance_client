@@ -35,6 +35,7 @@ const ReportModal = ({ open, onCancel, selectedProduct }) => {
 
     createReport(formData)
       .then((res) => {
+        onCancel();
         message.success("Отчёт создан");
       })
       .catch((e) => {
@@ -43,6 +44,16 @@ const ReportModal = ({ open, onCancel, selectedProduct }) => {
   };
 
   const handleFileUpload = (file) => {
+    const allowedTypes = [
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+      message.error("Можно загружать только документы Word (.doc, .docx)");
+      return Upload.LIST_IGNORE;
+    }
+
     setFile(file);
     return false;
   };
@@ -98,8 +109,16 @@ const ReportModal = ({ open, onCancel, selectedProduct }) => {
               </button>
             </div>
           )}
-          <Form.Item>
-            <Upload beforeUpload={handleFileUpload} showUploadList={false}>
+          <Form.Item name="file">
+            <Upload
+              accept=".doc,.docx"
+              name="file"
+              beforeUpload={handleFileUpload}
+              showUploadList={false}
+              onChange={({ file }) => {
+                setFile(file);
+              }}
+            >
               <Button icon={<UploadOutlined />} className="rounded-xl">
                 Загрузить отчет
               </Button>

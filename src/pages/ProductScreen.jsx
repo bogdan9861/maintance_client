@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router";
 import { editProduct, getProductById, updateUsage } from "../api/products";
+import ReportsTable from "../components/ReportsTable";
 
 const { Title, Text } = Typography;
 
@@ -162,6 +163,9 @@ const ProductScreen = () => {
                 )}
               </div>
             </div>
+          </div>
+          <div className="mt-20">
+            <ReportsTable productId={product?.id} />
           </div>
         </div>
       </div>

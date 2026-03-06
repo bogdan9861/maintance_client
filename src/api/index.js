@@ -2,9 +2,7 @@ import axios from "axios";
 import { enums } from "../constants";
 
 const api = axios.create({
-  baseURL:
-    process.env.REACT_APP_BASE_URL ||
-    "https://maintance-server.onrender.com/api/",
+  baseURL: process.env.REACT_APP_BASE_URL || "http://localhost:8080/api/",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
